@@ -1,7 +1,9 @@
 SHELL := /bin/bash
 
-setup: 
-	source venv/bin/activate
+setup:
+	rm -rf venv
+	python3.11 -m venv venv
+	. venv/bin/activate
 	venv/bin/pip install -r requirements.txt
 	npm install --prefix client
 
@@ -9,7 +11,10 @@ build-client:
 	npm run build --prefix client
 
 run: build-client
-	venv/bin/uvicorn main:app --reload 
+	venv/bin/uvicorn server.main:app --reload 
+
+run-server:
+	venv/bin/uvicorn server.main:app --reload
 
 
 run-dev-client:
