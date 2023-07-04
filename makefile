@@ -1,10 +1,13 @@
 SHELL := /bin/bash
 
-setup:
+server-setup:
 	rm -rf venv
 	python3.11 -m venv venv
 	. venv/bin/activate
 	venv/bin/pip install -r requirements.txt
+
+
+full-setup: server-setup
 	npm install --prefix client
 
 build-client:

@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 
 from server.databases.system import create_db
-from server.services.users.routes import UsersRouter
+from server.urls.users.routes import UsersRouter
 
 # from fastapi.staticfiles import StaticFiles
 
