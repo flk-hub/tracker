@@ -1,8 +1,9 @@
 """System Database Module."""
-from sqlalchemy import create_engine
+from unicodedata import category
+from sqlalchemy import Float, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Boolean, Column, Integer, String
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 _DATABASE_URL = "sqlite:///test.db"
 
@@ -33,7 +34,19 @@ class UserModel(DatabaseModel):
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    email = Column(String, unique=True, index=True)
+    email = Column(String(50), unique=True, index=True)
     hashed_pwd = Column(String)
-    user_name = Column(String)
+    user_name = Column(String(20))
     is_active = Column(Boolean, default=True)
+    transactions = relationship("TransactionModel", back_populates="issuer")
+
+
+class TransactionModel(DatabaseModel):
+    __tablename__ = "transactions"
+
+    transaction_id = Column(Integer, primary_key=True, index=True)
+    value = Column(Float, default=0)
+    category = Column(String)
+    type = Column(String(20))
+    issuer_id = Column(Integer, ForeignKey("users.user_id"))
+    issuer = relationship("UserModel", back_populates="transactions")
