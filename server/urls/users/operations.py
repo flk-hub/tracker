@@ -1,8 +1,8 @@
 """Operations Module."""
-from bcrypt import hashpw
+from bcrypt import hashpw, gensalt
 from sqlalchemy.orm import Session
 
-from ...databases.system import UserModel
+from ...models import UserModel
 from .types import UserCreate
 
 
@@ -19,9 +19,9 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user(db: Session, user: UserCreate):
-    hashed_pass = hashpw(user.password.encode("utf-8"), user.email)
+    hashed_pwd = hashpw(user.password.encode("utf-8"), gensalt())
     new_user = UserModel(
-        email=user.email, user_name=user.user_name, hashed_passwd=hashed_pass
+        email=user.email, user_name=user.user_name, hashed_pwd=hashed_pwd
     )
     db.add(new_user)
     db.commit()
