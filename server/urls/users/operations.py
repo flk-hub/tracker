@@ -1,4 +1,5 @@
 """Operations Module."""
+from bcrypt import hashpw
 from sqlalchemy.orm import Session
 
 from ...databases.system import UserModel
@@ -18,9 +19,9 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user(db: Session, user: UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
+    hashed_pass = hashpw(user.password.encode("utf-8"), user.email)
     new_user = UserModel(
-        email=user.email, user_name=user.user_name, hashed_password=fake_hashed_password
+        email=user.email, user_name=user.user_name, hashed_passwd=hashed_pass
     )
     db.add(new_user)
     db.commit()

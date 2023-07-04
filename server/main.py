@@ -1,11 +1,10 @@
 """Process entry points."""
 from fastapi import FastAPI
-
 from server.databases.system import create_db
 from server.urls.users.routes import UsersRouter
 
-# from fastapi.staticfiles import StaticFiles
 
+# from fastapi.staticfiles import StaticFiles
 
 create_db()
 
