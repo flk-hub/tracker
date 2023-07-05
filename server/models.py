@@ -1,6 +1,6 @@
 """System Database Module."""
-from unicodedata import category
-from sqlalchemy import Float, ForeignKey, create_engine
+from datetime import datetime
+from sqlalchemy import DateTime, Float, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, relationship
@@ -46,7 +46,9 @@ class TransactionModel(DatabaseModel):
 
     transaction_id = Column(Integer, primary_key=True, index=True)
     value = Column(Float, default=0)
-    category = Column(String)
-    type = Column(String(20))
+    category = Column(String(40))
+    description = Column(String)
+    in_out = Column(Boolean, default=False)  # false == in
+    date = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     issuer_id = Column(Integer, ForeignKey("users.user_id"))
     issuer = relationship("UserModel", back_populates="transactions")

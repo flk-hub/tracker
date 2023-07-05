@@ -1,11 +1,14 @@
 """Schemas Module."""
-from pydantic import BaseModel
+from datetime import datetime
+from pydantic import BaseModel, Field
 
 
 class TransactionBase(BaseModel):
     value: float
     category: str
-    type: str
+    description: str
+    date: datetime = Field(default_factory=datetime.now)
+    in_out: bool = False
 
 
 class TransactionCreate(TransactionBase):

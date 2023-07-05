@@ -1,19 +1,17 @@
-"""Process entry points."""
-from logging import DEBUG, StreamHandler, getLogger
-from sys import stdout
 from fastapi import FastAPI
 from server.models import create_db
 from server.routes import Router
+from server.utils import get_logger_to_file
 
 
 # from fastapi.staticfiles import StaticFiles
+LOGGER = get_logger_to_file(__name__, f"{__name__}.log")
 
+
+LOGGER.info("Setting the database...")
 create_db()
+LOGGER.info("Database setup complete.")
 
-
-LOGGER = getLogger("tracker")
-LOGGER.setLevel(DEBUG)
-LOGGER.addHandler(StreamHandler(stdout))
 
 app = FastAPI()
 app.include_router(Router)
