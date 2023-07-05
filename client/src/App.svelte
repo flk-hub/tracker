@@ -11,9 +11,9 @@
   <div class="drawer h-screen">
     <Router>
       <input id="page-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
+      <div class="drawer-content min-h-screen flex flex-col">
         <!-- Page content here -->
-        <main class="flex flex-1">
+        <main class="flex flex-grow">
           <nav class="flex-none w-14 h-full">
             <label for="page-drawer" class="btn btn-square btn-ghost"
               ><svg
@@ -30,13 +30,13 @@
               >
             </label>
           </nav>
-          <div class="container flex flex-col p-2">
+          <div class="flex flex-col p-2 w-full lg:max-h-[700px] overflow-auto">
             <Route path="/"><Home /></Route>
             <Route path="/transactions"><Transactions /></Route>
           </div>
         </main>
         <footer
-          class="footer footer-center flex-6 p-4 bg-base-300 text-base-content"
+          class="footer footer-center flex-shrink-0 p-4 bg-base-300 text-base-content"
         >
           <div>
             <p>Copyright © 2023 - All right reserved</p>

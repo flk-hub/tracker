@@ -1,9 +1,32 @@
 <h1 class="text-2xl font-semibold mb-4">Transactions</h1>
-<div class="overflow-y-auto max-h-[770px]">
-  <table class="min-w-full table table-zebra">
+<!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_6.showModal()">open modal</button>
+<dialog id="my_modal_6" class="modal modal-bottom sm:modal-middle">
+  <form method="dialog" class="modal-box">
+    <h3 class="font-bold text-lg">Hello!</h3>
+    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="modal-action">
+      <!-- if there is a button in form, it will close the modal -->
+      <button class="btn">Close</button>
+    </div>
+  </form>
+</dialog>
+<div class="form-control">
+  <input
+    type="text"
+    placeholder="Search"
+    class="input input-bordered w-24 md:w-auto"
+  />
+</div>
+<div class="overflow-x-auto">
+  <table class="table table-auto table-zebra">
     <thead>
       <tr>
-        <th />
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
         <th>Name</th>
         <th>Job</th>
         <th>company</th>
@@ -14,6 +37,11 @@
     </thead>
     <tbody>
       <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
         <th>1</th>
         <td>Cy Ganderton</td>
         <td>Quality Control Specialist</td>
@@ -21,6 +49,41 @@
         <td>Canada</td>
         <td>12/16/2020</td>
         <td>Blue</td>
+        <td> <button class="btn btn-ghost">Button</button></td>
+        <td
+          ><!-- Open the modal using ID.showModal() method -->
+          <button class="btn" onclick="my_modal_5.showModal()"
+            >open modal</button
+          >
+          <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+            <form method="dialog" class="modal-box">
+              <h3 class="font-bold text-lg">Hello!</h3>
+              <p class="py-4">
+                Press ESC key or click the button below to close
+              </p>
+              <select class="select select-bordered w-full max-w-xs">
+                <option disabled selected>Who shot first?</option>
+                <option>Han Solo</option>
+                <option>Greedo</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Type here"
+                class="input input-bordered w-full max-w-xs"
+              />
+              <input
+                type="number"
+                step="0.01"
+                placeholder="Type here"
+                class="input input-bordered w-full max-w-xs"
+              />
+              <div class="modal-action">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </div>
+            </form>
+          </dialog></td
+        >
       </tr>
       <tr>
         <th>2</th>
@@ -194,16 +257,5 @@
         <td>Red</td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <th />
-        <th>Name</th>
-        <th>Job</th>
-        <th>company</th>
-        <th>location</th>
-        <th>Last Login</th>
-        <th>Favorite Color</th>
-      </tr>
-    </tfoot>
   </table>
 </div>

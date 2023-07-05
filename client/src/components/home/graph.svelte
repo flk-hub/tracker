@@ -64,7 +64,11 @@
   });
 </script>
 
-<div class="grid grid-rows-2 gap-2 h-full">
-  <div><canvas id="transactions-bar" /></div>
-  <div><canvas id="transactions-donut" /></div>
+<div class="grid grid-rows-2 h-screen">
+  <div class="object-fill">
+    <canvas id="transactions-bar" />
+  </div>
+  <div>
+    <canvas id="transactions-donut" />
+  </div>
 </div>
