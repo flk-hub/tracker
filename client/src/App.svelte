@@ -1,103 +1,67 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
-  import Home from "./components/home/home.svelte";
+  import { Router, Route, Link } from "svelte-routing";
+  import Home from "./pages/home.svelte";
+  import Transactions from "./pages/transactions.svelte";
+  import Login from "./pages/login.svelte";
+
+  let logged = true;
 </script>
 
-<div class="flex h-screen">
-  <div class="bg-gray-800 text-white w-64 flex flex-col">
-    <div class="flex items-center justify-between px-6 py-4">
-      <h1 class="text-xl font-semibold">Dashboard</h1>
-      <button class="text-gray-500 focus:outline-none focus:text-gray-300">
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M4 6h16M4 12h8m-8 6h16" />
-        </svg>
-      </button>
-    </div>
-
-    <nav class="flex-grow">
-      <ul class="space-y-1 px-2 py-3">
-        <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="flex items-center space-x-2">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M12 20h9" />
-              <path d="M12 4v16m-7-8l7-8 7 8" />
-            </svg>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="flex items-center space-x-2">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M12 20h9" />
-              <path d="M12 4v16m-7-8l7-8 7 8" />
-            </svg>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="flex items-center space-x-2">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M12 20h9" />
-              <path d="M12 4v16m-7-8l7-8 7 8" />
-            </svg>
-            <span>Analytics</span>
-          </a>
-        </li>
-        <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="flex items-center space-x-2">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M12 20h9" />
-              <path d="M12 4v16m-7-8l7-8 7 8" />
-            </svg>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="flex-grow bg-gray-100 p-8">
+{#if logged}
+  <div class="drawer h-screen">
     <Router>
-      <Route component={Home} />
+      <input id="page-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex flex-col">
+        <!-- Page content here -->
+        <main class="flex flex-1">
+          <nav class="flex-none w-14 h-full">
+            <label for="page-drawer" class="btn btn-square btn-ghost"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="inline-block w-5 h-5 stroke-current"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                /></svg
+              >
+            </label>
+          </nav>
+          <div class="container flex flex-col p-2">
+            <Route path="/"><Home /></Route>
+            <Route path="/transactions"><Transactions /></Route>
+          </div>
+        </main>
+        <footer
+          class="footer footer-center flex-6 p-4 bg-base-300 text-base-content"
+        >
+          <div>
+            <p>Copyright © 2023 - All right reserved</p>
+          </div>
+        </footer>
+      </div>
+      <nav class="drawer-side">
+        <label for="page-drawer" class="drawer-overlay" />
+        <ul class="menu p-4 w-60 h-full bg-base-200 text-base-content">
+          <!-- Sidebar content here -->
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/transactions">Transactions</Link>
+          </li>
+          <li>
+            <button on:click={() => (logged = false)}>Logout<button /> </button>
+          </li>
+        </ul>
+      </nav>
     </Router>
   </div>
-</div>
+{/if}
+
+{#if !logged}
+  <Login />
+{/if}
